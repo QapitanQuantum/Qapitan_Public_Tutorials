@@ -12,7 +12,11 @@ class Qapitan:
 
     def login(self):
         response = requests.post(self.QAPITAN_PUBLIC_API + '/login', data=json.dumps(self.PAYLOAD_USER))
+        print(self.PAYLOAD_USER)
+        print(self.QAPITAN_PUBLIC_API)
+        print(response)
         response_json = response.json()
+        
         access_token = response_json['access_token']
         header = {'Authorization': 'Bearer ' + access_token}
         return header
