@@ -26,3 +26,7 @@ class Qapitan:
     def get_result(self, header, job_name):
         response = requests.get(self.QAPITAN_PUBLIC_API + "/job/" + job_name, headers=header)
         return response.json()
+
+    def get_results(self, header):
+        response = requests.get(self.QAPITAN_PUBLIC_API + "/results", headers=header)
+        return response.json()
