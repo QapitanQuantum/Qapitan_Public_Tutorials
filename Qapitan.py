@@ -30,3 +30,8 @@ class Qapitan:
     def get_results(self, header):
         response = requests.get(self.QAPITAN_PUBLIC_API + "/results", headers=header)
         return response.json()
+
+    def get_best_result(self, header, job_name):
+        result = self.get_result(header, job_name)
+        for i in result['job'][job_name]['executions']:
+            return result['job'][job_name]['executions'][i]['result']
