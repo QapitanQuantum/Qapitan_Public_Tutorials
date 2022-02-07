@@ -1,18 +1,18 @@
 import requests
 import json
 
-
 class Qapitan:
-    QAPITAN_PUBLIC_API = "https://hpg6m6hw7c.execute-api.eu-west-3.amazonaws.com/dev"
-    PAYLOAD_USER = {'username': 'adrian@qapitan.com', 'password': 'qapified'}
 
-    def __init__(self, QAPITAN_PUBLIC_API=False, PAYLOAD_USER=False):
-        self.QAPITAN_PUBlIC_API = QAPITAN_PUBLIC_API
+    def __init__(self, QAPITAN_PUBLIC_API, PAYLOAD_USER):
+        self.QAPITAN_PUBLIC_API = QAPITAN_PUBLIC_API
         self.PAYLOAD_USER = PAYLOAD_USER
+        print(self.PAYLOAD_USER)
 
     def login(self):
         response = requests.post(self.QAPITAN_PUBLIC_API + '/login', json=self.PAYLOAD_USER)
         response_json = response.json()
+
+        print(response_json)
         
         access_token = response_json['access_token']
         header = {'Authorization': 'Bearer ' + access_token}
