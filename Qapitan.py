@@ -10,7 +10,7 @@ class Qapitan:
 
     def login(self):
         response = requests.post(self.QAPITAN_PUBLIC_API + '/login', json=self.PAYLOAD_USER)
-        if(response.status_code == 200):
+        if(response.status_code == 200 or response.status_code == 201):
             response_json = response.json()
             access_token = response_json['access_token']
             header = {'Authorization': 'Bearer ' + access_token}
@@ -20,7 +20,7 @@ class Qapitan:
 
     def execute(self, header, problem, payload):
         response = requests.post(self.QAPITAN_PUBLIC_API + '/problem/' + problem, json=payload, headers=header)
-        if(response.status_code == 200):
+        if(response.status_code == 200 or response.status_code == 201):
             response_json = response.json()
             return response_json
         else:
@@ -28,7 +28,7 @@ class Qapitan:
 
     def get_result(self, header, job_name):
         response = requests.get(self.QAPITAN_PUBLIC_API + "/job/" + job_name, headers=header)
-        if(response.status_code == 200):
+        if(response.status_code == 200 or response.status_code == 201):
             response_json = response.json()
             return response_json
         else:
@@ -37,7 +37,7 @@ class Qapitan:
 
     def get_results(self, header):
         response = requests.get(self.QAPITAN_PUBLIC_API + "/results", headers=header)
-        if(response.status_code == 200):
+        if(response.status_code == 200 or response.status_code == 201):
             response_json = response.json()
             return response_json
         else:
